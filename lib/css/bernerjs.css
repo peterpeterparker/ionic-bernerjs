@@ -1,6 +1,7 @@
 body .reveal section img {
     box-shadow: none;
     border: 0;
+    background: none;
 }
 
 body .reveal section h1 {
