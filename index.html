@@ -70,7 +70,7 @@
 				</section>
 
 				<section data-background-color="white">
-					<p style="color: black"><span style="color: #ff65a9">Fluster</span> a marketplace for rooms and roommates with plenty of unique features which makes life easier</p>
+					<p style="color: black"><span style="color: #ff65a9">Fluster</span> the clever marketplace for rooms and roommates with plenty of unique features which makes life easier</p>
 					<img src="img/fluster-screenshots.png" style="width: 80%; padding: 16px;">
 				</section>
 
@@ -124,7 +124,8 @@
 							<h2>NativeScript <i class="fas fa-times"></i></h2>
 							<div style="display: flex; justify-content: center;">
 								<ul>
-									<li>Not a big fan of GUI editor</li>
+									<li>Not a big fan of its language for user interface</li>
+									<li>It was not ready</li>
 									<li>And what about the web?</li>
 								</ul>
 							</div>
@@ -173,11 +174,13 @@
 					<h3>Looking back, any difficulties?</h3>
 
 					<ul>
-						<li>Push notifications</li>
-						<li>Access to third party API</li>
-						<li>Wizard</li>
-						<li>Follow updates</li>
+						<li>Push notifications: Use a real phone</li>
+						<li>Access to third party API: Use your server</li>
+						<li>Wizard: That's work</li>
+						<li>Follow updates: Every weeks</li>
+						<li>Cordova plugins: A plugin may die</li>
 					</ul>
+
 				</section>
 
 				<section>
@@ -278,7 +281,7 @@
 							<div style="display: flex; justify-content: center; padding-top: 16px;">
 								<div style="flex-basis: 100%">
 									<ul>
-										<li>Cross-platform app for <i class="fab fa-apple"></i> <i class="fab fa-android"></i> <img src="img/electron-icon.png" style="width: 0.8em; margin: 0;"> and PWA</li>
+										<li>Cross-platform app for <i class="fab fa-apple"></i> <i class="fab fa-android"></i> <img src="img/electron-icon.png" style="width: 0.8em; margin: 0;"> and <img src="img/pwa-icon.png" style="width: 1.8em; margin: 0;"></li>
                                         <li>Eventual alternative to Cordova</li>
 										<li>Backwards-compatible for many Cordova plugins</li>
 									</ul>
@@ -291,30 +294,28 @@
 				<section>
 					<h2>DEMO</h2>
 					<pre style="width: 80%;padding: 10px;font-size: 0.50em;background: white;color: black;">
-import { AlertController } from 'ionic-angular';
+> ionic start hopp-yb
+> cd hopp-yb
+> npm install --save @capacitor/core @capacitor/cli
+> npx cap init
+> ...
 
-@IonicPage()
-@Component({
-    templateUrl: 'demo.html',
-    selector: 'demo'
-})
-export class Demo {
-	constructor(private alertCtrl: AlertController) {
-	}
 
-	ionViewDidEnter() {
-		this.presentAlert();
-	}
+import { Plugins, CameraResultType } from '@capacitor/core';
 
-	presentAlert() {
-		let alert = this.alertCtrl.create({
-			title: 'DEMO',
-			subTitle: 'Cool?',
-			buttons: ['Cool cool cool']
-		});
+const { Camera } = Plugins;
 
-		alert.present();
-	}
+async takePicture() {
+  const { Camera } = Plugins;
+
+  const image = await Camera.getPhoto({
+     quality: 90,
+     allowEditing: true,
+     resultType: CameraResultType.Base64,
+     source: CameraSource.Camera
+  });
+
+  this.image = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.base64Data));
 }
 </pre>
 				</section>
